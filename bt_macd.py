@@ -9,8 +9,8 @@ pip install matplotlib==3.2.2
 
 指数平滑异同移动平均线 MACD
 买入与卖出算法：
-当持有空仓时候且macd、signal、histo 都大于 0，买入
-当持有仓位时候且macd、signal、histo 都小于等于 0，卖出
+当持有空仓时候且 DIF、MACD、Histo 都大于 0，买入
+当持有仓位时候且 DIF、MACD、Histo 都小于等于 0，卖出
 
 2.MACD 的应用
 MACD 在应用上，是以 12 日为快速移动平均线（12 日 EMA），而以 26 日为慢速移动平均线（ 26 日 EMA），首先计算出此两条移动平均线数值，再
@@ -52,17 +52,17 @@ class StrategyClass(bt.Strategy):
     """
     平滑异同移动平均线 MACD
 
-    DIF(MACD): 计算 12 天平均和 26 天平均的差，公式：EMA(C,12)-EMA(c,26)
-    Signal(DEA) (红线): 计算 macd 9 天均值，公式：Signal(DEA)：EMA(MACD,9)
-    Histogram(柱): 计算 macd 与 signal 的差值，公式：Histogram: MACD-Signal
+    DIF: 计算 12 天平均和 26 天平均的差，公式：EMA(C, 12)-EMA(C, 26)
+    MACD: 计算 macd 9 天均值，公式：EMA(MACD, 9)
+    Histogram: 计算 macd 与 signal 的差值，公式：dif - macd
 
     period_ma1=12
     period_ma2=26
     period_signal=9
 
-    macd = ema(data, me1_period) - ema(data, me2_period)
-    signal = ema(macd, signal_period)
-    histo = macd - signal
+    dif = ema(data, me1_period) - ema(data, me2_period)
+    macd = ema(macd, signal_period)
+    histo = dif - macd
     """
 
     def __init__(self):
