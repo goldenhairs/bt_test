@@ -12,15 +12,10 @@ import pandas as pd
 
 
 class SmaStrategy(bt.Strategy):
-    params = {
-        "short_window": 30,
-        "long_window": 70
-    }
-
     def __init__(self):
         self.dataclose = self.datas[0].close
-        self.lines.top = bt.indicators.BollingerBands(self.datas[0], period=20).top
-        self.lines.bot = bt.indicators.BollingerBands(self.datas[0], period=20).bot
+        self.lines.top = bt.indicators.BollingerBands(self.datas[0], period=20, devfactor=2).top
+        self.lines.bot = bt.indicators.BollingerBands(self.datas[0], period=20, devfactor=2).bot
 
     def log(self, txt, dt=None):
         dt = dt or self.datas[0].datetime.date(0)

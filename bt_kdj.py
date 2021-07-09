@@ -8,14 +8,14 @@ Desc: BackTrader-KDJ 策略
 pip install matplotlib==3.2.2
 
 策略：
-当 J 值上穿K值的时候，是买入信号，此时买入。
-当J值下穿K值的时候，是卖出信号，此时卖出。
+当 J 值上穿 K 值的时候，是买入信号，此时买入。
+当 J 值下穿 K 值的时候，是卖出信号，此时卖出。
 
 计算方式：
-RSV = (收盘价-N周期最低价) / (N周期最高价-N周期最低价) * 100
-K值 = RSV的 N 周期加权移动平均值
-D值 = K值的 N 周期加权移动平均值
-J值 = 3 * K-2 * D
+RSV = (收盘价 - N 周期最低价) / (N 周期最高价 - N 周期最低价) * 100
+K 值 = RSV 的 N 周期加权移动平均值
+D 值 = K 值的 N 周期加权移动平均值
+J 值 = 3 * K-2 * D
 """
 import datetime
 
@@ -27,10 +27,10 @@ import pandas as pd
 class StrategyClass(bt.Strategy):
     """
     KDJ指标
-    RSV = (收盘价-N周期最低价) / (N周期最高价-N周期最低价) * 100
-    K值 = RSV的 N 周期加权移动平均值
-    D值 = K值的 N 周期加权移动平均值
-    J值 = 3 * K-2 * D
+    RSV = (收盘价 - N 周期最低价) / (N 周期最高价 - N 周期最低价) * 100
+    K 值 = RSV 的 N 周期加权移动平均值
+    D 值 = K 值的 N 周期加权移动平均值
+    J 值 = 3 * K-2 * D
     """
 
     def __init__(self):
