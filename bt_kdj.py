@@ -12,10 +12,10 @@ pip install matplotlib==3.2.2
 当 J 值下穿 K 值的时候，是卖出信号，此时卖出。
 
 计算方式：
-RSV = (收盘价 - N 周期最低价) / (N 周期最高价 - N 周期最低价) * 100
-K 值 = RSV 的 N 周期加权移动平均值
-D 值 = K 值的 N 周期加权移动平均值
-J 值 = 3 * K-2 * D
+RSV = (收盘价 - N 周期最低价) / (N 周期最高价 - N 周期最低价) * 100；此处的 N 设置为 9 日
+K 值 = RSV 的 N 周期加权移动平均值；此处加权平均的参数为 3 日
+D 值 = K 值的 N 周期加权移动平均值；此处加权平均的参数为 3 日
+J 值 = 3 * K-2 * D；此处的 3 和 2 都是固定的模式
 """
 import datetime
 
@@ -27,16 +27,15 @@ import pandas as pd
 class StrategyClass(bt.Strategy):
     """
     KDJ指标
-    RSV = (收盘价 - N 周期最低价) / (N 周期最高价 - N 周期最低价) * 100
-    K 值 = RSV 的 N 周期加权移动平均值
-    D 值 = K 值的 N 周期加权移动平均值
+    RSV = (收盘价 - N 周期最低价) / (N 周期最高价 - N 周期最低价) * 100；此处的 N 设置为 9 日
+    K 值 = RSV 的 N 周期加权移动平均值；此处加权平均的参数为 3 日
+    D 值 = K 值的 N 周期加权移动平均值；此处加权平均的参数为 3 日
     J 值 = 3 * K-2 * D
     """
 
     def __init__(self):
-        # sma源码位于indicators\macd.py
-        # 指标必须要定义在策略类中的初始化函数中
         # 9个交易日内最高价
+        bt.indicators.StochasticFull
         self.high_nine = bt.indicators.Highest(self.data.high, period=9)
         # 9个交易日内最低价
         self.low_nine = bt.indicators.Lowest(self.data.low, period=9)
